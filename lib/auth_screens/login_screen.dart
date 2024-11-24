@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   final FormKey = GlobalKey<FormState>();
-  TextEditingController username = TextEditingController();
+  TextEditingController user_name = TextEditingController();
   TextEditingController password = TextEditingController();
 
   @override
@@ -71,7 +71,7 @@ class LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       TextFld(
-                        controller_name: username,
+                        controller_name: user_name,
                         errortext: "User Name is Required",
                         lblText: "User Name",
                         hintText: "Enter Username",
@@ -204,48 +204,47 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void userLogin() async {
-    // Manually check for empty fields
-    if (username.text.isEmpty || password.text.isEmpty) {
-      print("Username and password are required.");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Username and password are required.")),
-      );
-      return;
-    }
-
-    var url = "https://xilium.no/wp-json/mobile-apis/login";
-    var login_data = {
-      "Username": username.text,
-      "password": password.text,
-    };
-    var encode_to_json = json.encode(login_data);
-    var parse_url = Uri.parse(url);
-
-    try {
-      Response response = await http.post(
-        parse_url,
-        body: encode_to_json,
-        headers: {"Content-Type": "application/json"},
-      );
-
-      if (response.statusCode == 200) {
-        var result = jsonDecode(response.body);
-        print(result);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Login successful!")),
-        );
-      } else {
-        print("Failed to login. Status code: ${response.statusCode}");
-        print("Response body: ${response.body}"); // Debugging line
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Failed to login. Please try again.")),
-        );
-      }
-    } catch (e) {
-      print("Error: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("An error occurred: $e")), 
-      );
-    }
+  if (user_name.text.isEmpty || password.text.isEmpty) {
+    print("Username and password are required.");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Username and password are required.")),
+    );
+    return;
   }
+
+  var url = "https://xilium.no/wp-json/mobile-apis/login";
+  var login_data = {
+    "username": user_name.text, 
+    "password": password.text,
+  };
+  var encode_to_json = json.encode(login_data);
+  var parse_url = Uri.parse(url);
+
+  try {
+    Response response = await http.post(
+      parse_url,
+      body: encode_to_json,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      var result = jsonDecode(response.body);
+      print(result);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Login successful!")),
+      );
+    } else {
+      print("Failed to login. Status code: ${response.statusCode}");
+      print("Response body: ${response.body}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Failed to login. Please try again.")),
+      );
+    }
+  } catch (e) {
+    print("Error: $e");
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("An error occurred: $e")),
+    );
+  }
+}
 }
