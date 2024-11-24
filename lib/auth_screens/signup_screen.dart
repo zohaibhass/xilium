@@ -28,6 +28,7 @@ class SignupScreenState extends State<SignupScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirm_password = TextEditingController();
+  TextEditingController terms_accepted = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +172,7 @@ class SignupScreenState extends State<SignupScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Checkbox(
+                                
                                 value: _isAgreed,
                                 onChanged: (bool? value) {
                                   setState(() {
@@ -204,7 +206,7 @@ class SignupScreenState extends State<SignupScreen> {
                             if (FormKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                      content: Text("Processing Data")));
+                                      content: Text("Please Wait")));
                             }
 
                             return registerUser();
@@ -253,18 +255,20 @@ class SignupScreenState extends State<SignupScreen> {
     var url = "https://xilium.no/wp-json/mobile-apis/register";
     var data = {
       "first_name": first_name.text,
-      "last_name": last_name.text,
-      "surname": user_name.text,
+      "surname": last_name.text,
+      "user_name": user_name.text,
       "address": address.text,
+      "email":email.text,
       "telephone": telephone.text,
       "password": password.text,
-      "confirm_password": confirm_password,
+      "confirm_password": confirm_password.text,
+       "terms_accepted": _isAgreed,
     };
     var encode_to_json = json.encode(data);
 
     var parse_url = Uri.parse(url);
     Response response = await http.post(parse_url,
-        body: encode_to_json, headers: {"content_type": "application/jason"});
+        body: encode_to_json, headers: {"content-type": "application/json"});
 
     var result = jsonDecode(response.body);
     print(result);
