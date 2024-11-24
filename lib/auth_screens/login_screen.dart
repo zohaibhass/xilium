@@ -12,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  final FormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -26,8 +27,8 @@ class LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 300,
                   color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30, top: 50),
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 30, top: 50),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -38,10 +39,10 @@ class LoginScreenState extends State<LoginScreen> {
                         HeadingText(
                           txt: "Account",
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 3,
                         ),
-                        const Text(
+                        Text(
                           "Sign in to your Account",
                           style: TextStyle(color: Colors.white),
                         ),
@@ -64,125 +65,139 @@ class LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
-              child: Column(
-                children: [
-                  const TextFld(
-                    lblText: "Email",
-                    hintText: "Enter your Email",
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const TextFld(
-                      lblText: "Password",
-                      hintText: "Enter your Password",
-                      prefixIcon: Icon(Icons.password)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 160),
-                    child: InkWell(
-                        child: Text(
-                      "Forget Password?",
-                      style: TextStyle(color: Colors.blue),
-                    )),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  LargeButton(
-                    name: "Login",
-                    styling: const TextStyle(color: Colors.white),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Row(
-                    children: [
-                      Expanded(
-                          child: Divider(
-                        color: Color(0xffdadada),
-                        height: 2,
-                      )),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(child: Text("or login with")),
-                      Expanded(
-                          child: Divider(
-                        color: Color(0xffdadada),
-                        height: 2,
-                      ))
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xffdadada)),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Center(
-                          child: Image.asset("assets/icons/apple.png"),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffdadada)),
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Center(
-                            child: Image.asset("assets/icons/google.png")),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: const Color(0xffdadada)),
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Center(
-                          child: Image.asset("assets/icons/facebook.png"),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 70,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't Have Account?"),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupScreen())),
+              child: Form(
+                key: FormKey,
+                child: Column(
+                  children: [
+                    const TextFld(
+                      errortext: "Email is Required",
+                      lblText: "Email",
+                      hintText: "Enter your Email",
+                      prefixIcon: Icon(Icons.email),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const TextFld(
+                        errortext: "Password is Required",
+                        lblText: "Password",
+                        hintText: "Enter your Password",
+                        prefixIcon: Icon(Icons.password)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 160),
+                      child: InkWell(
                           child: Text(
-                            "Register",
-                            style: TextStyle(color: Colors.blue),
-                          ))
-                    ],
-                  )
-                ],
+                        "Forget Password?",
+                        style: TextStyle(color: Colors.blue),
+                      )),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    LargeButton(
+                      callback: () {
+                        if (FormKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Processing Data")));
+                        }
+                      },
+                      name: "Login",
+                      styling: TextStyle(color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const Row(
+                      children: [
+                        Expanded(
+                            child: Divider(
+                          color: Color(0xffdadada),
+                          height: 2,
+                        )),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(child: Text("or login with")),
+                        Expanded(
+                            child: Divider(
+                          color: Color(0xffdadada),
+                          height: 2,
+                        ))
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xffdadada)),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Center(
+                            child: Image.asset("assets/icons/apple.png"),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffdadada)),
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Center(
+                              child: Image.asset("assets/icons/google.png")),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: const Color(0xffdadada)),
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Center(
+                            child: Image.asset("assets/icons/facebook.png"),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't Have Account?"),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignupScreen())),
+                            child: const Text(
+                              "Register",
+                              style: TextStyle(color: Colors.blue),
+                            ))
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],

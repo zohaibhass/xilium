@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSwatch(backgroundColor: const Color(0xff52bf92)),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

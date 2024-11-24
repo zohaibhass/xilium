@@ -6,6 +6,8 @@ class TextFld extends StatefulWidget {
   final Widget? prefixIcon;
   final Widget? sfxicon;
   final bool obText;
+  final String? errortext;
+  final TextEditingController? controller_name;
 
   const TextFld({
     super.key,
@@ -14,6 +16,8 @@ class TextFld extends StatefulWidget {
     this.prefixIcon,
     this.sfxicon,
     this.obText = false,
+    this.errortext = "This Field is Required",
+    this.controller_name,
   });
 
   @override
@@ -32,8 +36,16 @@ class _TextFldState extends State<TextFld> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.controller_name,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return widget.errortext;
+        }
+        return null;
+      },
       obscureText: _obscureText,
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10),
         labelText: widget.lblText ?? "",
         hintText: widget.hintText ?? "",
         hintStyle: const TextStyle(color: Color(0xffDADADA)),
