@@ -256,7 +256,7 @@ class SignupScreenState extends State<SignupScreen> {
     var data = {
       "first_name": first_name.text,
       "surname": last_name.text,
-      "user_name": user_name.text,
+      "Username": user_name.text,
       "address": address.text,
       "email":email.text,
       "telephone": telephone.text,
