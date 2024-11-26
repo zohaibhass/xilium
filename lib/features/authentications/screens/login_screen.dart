@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:xilium/custom_widgets/text_field.dart';
-import 'package:xilium/custom_widgets/heading_text.dart';
-import 'package:xilium/custom_widgets/buttons.dart';
-import 'package:xilium/auth_screens/signup_screen.dart';
+import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
+import 'package:xilium/common/widgets/custom_widgets/heading_text.dart';
+import 'package:xilium/common/widgets/custom_widgets/buttons.dart';
+import 'package:xilium/features/authentications/screens/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -204,47 +204,47 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void userLogin() async {
-  if (user_name.text.isEmpty || password.text.isEmpty) {
-    print("Username and password are required.");
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Username and password are required.")),
-    );
-    return;
-  }
-
-  var url = "https://xilium.no/wp-json/mobile-apis/login";
-  var login_data = {
-    "username": user_name.text, 
-    "password": password.text,
-  };
-  var encode_to_json = json.encode(login_data);
-  var parse_url = Uri.parse(url);
-
-  try {
-    Response response = await http.post(
-      parse_url,
-      body: encode_to_json,
-      headers: {"Content-Type": "application/json"},
-    );
-
-    if (response.statusCode == 200) {
-      var result = jsonDecode(response.body);
-      print(result);
+    if (user_name.text.isEmpty || password.text.isEmpty) {
+      print("Username and password are required.");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Login successful!")),
+        const SnackBar(content: Text("Username and password are required.")),
       );
-    } else {
-      print("Failed to login. Status code: ${response.statusCode}");
-      print("Response body: ${response.body}");
+      return;
+    }
+
+    var url = "https://xilium.no/wp-json/mobile-apis/login";
+    var login_data = {
+      "username": user_name.text,
+      "password": password.text,
+    };
+    var encode_to_json = json.encode(login_data);
+    var parse_url = Uri.parse(url);
+
+    try {
+      Response response = await http.post(
+        parse_url,
+        body: encode_to_json,
+        headers: {"Content-Type": "application/json"},
+      );
+
+      if (response.statusCode == 200) {
+        var result = jsonDecode(response.body);
+        print(result);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Login successful!")),
+        );
+      } else {
+        print("Failed to login. Status code: ${response.statusCode}");
+        print("Response body: ${response.body}");
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Failed to login. Please try again.")),
+        );
+      }
+    } catch (e) {
+      print("Error: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Failed to login. Please try again.")),
+        SnackBar(content: Text("An error occurred: $e")),
       );
     }
-  } catch (e) {
-    print("Error: $e");
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("An error occurred: $e")),
-    );
   }
-}
 }
