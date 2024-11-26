@@ -6,6 +6,7 @@ import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
 import 'package:xilium/common/widgets/custom_widgets/heading_text.dart';
 import 'package:xilium/common/widgets/custom_widgets/buttons.dart';
 import 'package:xilium/features/authentications/screens/signup_screen.dart';
+import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,10 +42,7 @@ class LoginScreenState extends State<LoginScreen> {
                           HeadingText(txt: "Sign in to your"),
                           HeadingText(txt: "Account"),
                           SizedBox(height: 3),
-                          Text(
-                            "Sign in to your Account",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          
                         ],
                       ),
                     ),
