@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
 import 'package:xilium/common/widgets/custom_widgets/heading_text.dart';
 import 'package:xilium/common/widgets/custom_widgets/buttons.dart';
-import 'package:xilium/features/authentications/models/signup_model.dart';
-import 'package:xilium/features/authentications/controllers/signup_controller.dart';
+import 'package:xilium/features/authentications/models/user_model.dart';
+import 'package:xilium/features/authentications/controllers/user_controller.dart';
 import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({Key? key}) : super(key: key);
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => SignupScreenState();
@@ -15,7 +15,7 @@ class SignupScreen extends StatefulWidget {
 
 class SignupScreenState extends State<SignupScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final SignupController signupController = SignupController();
+  final UserController signupController = UserController();
   final TextEditingController firstName = TextEditingController();
   final TextEditingController sureName = TextEditingController();
   final TextEditingController userName = TextEditingController();
@@ -24,7 +24,7 @@ class SignupScreenState extends State<SignupScreen> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController confirmPassword = TextEditingController();
-  bool terms_accepted = false;
+  bool termsAccepted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +145,9 @@ class SignupScreenState extends State<SignupScreen> {
                     Row(
                       children: [
                         Checkbox(
-                          value: terms_accepted,
+                          value: termsAccepted,
                           onChanged: (value) {
-                            setState(() => terms_accepted = value ?? false);
+                            setState(() => termsAccepted = value ?? false);
                           },
                         ),
                         const Text("Agree with "),
@@ -164,7 +164,7 @@ class SignupScreenState extends State<SignupScreen> {
                     LargeButton(
                       callback: () async {
                         if (formKey.currentState!.validate()) {
-                          final user = SignupModel(
+                          final user = UserModel(
                             firstName: firstName.text,
                             surName: sureName.text,
                             userName: userName.text,
@@ -173,7 +173,7 @@ class SignupScreenState extends State<SignupScreen> {
                             email: email.text,
                             password: password.text,
                             confirmPassword: confirmPassword.text,
-                            termsAccepted: terms_accepted,
+                            termsAccepted: termsAccepted,
                           );
 
                           final result =
@@ -196,7 +196,6 @@ class SignupScreenState extends State<SignupScreen> {
                               ),
                             );
 
-                            
                             Navigator.push(
                               context,
                               MaterialPageRoute(

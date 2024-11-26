@@ -1,4 +1,4 @@
-class SignupModel {
+class UserModel {
   final String firstName;
   final String surName;
   final String userName;
@@ -9,7 +9,7 @@ class SignupModel {
   final String confirmPassword;
   bool termsAccepted=false;
 
-  SignupModel(
+  UserModel(
       {required this.firstName,
       required this.surName,
       required this.userName,

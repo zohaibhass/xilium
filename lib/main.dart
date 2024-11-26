@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'features/authentications/screens/login_screen.dart';
+
+import 'package:xilium/features/authentications/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSwatch(backgroundColor: const Color(0xff52bf92)),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

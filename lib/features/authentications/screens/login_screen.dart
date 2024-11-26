@@ -75,7 +75,7 @@ class LoginScreenState extends State<LoginScreen> {
                         errortext: "User Name is Required",
                         lblText: "User Name",
                         hintText: "Enter Username",
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                       ),
                       const SizedBox(height: 20),
                       TextFld(
@@ -83,7 +83,7 @@ class LoginScreenState extends State<LoginScreen> {
                         errortext: "Password is Required",
                         lblText: "Password",
                         hintText: "Enter your Password",
-                        prefixIcon: Icon(Icons.password),
+                        prefixIcon: const Icon(Icons.password),
                       ),
                       const SizedBox(height: 10),
                       const Padding(
@@ -108,7 +108,7 @@ class LoginScreenState extends State<LoginScreen> {
                           }
                         },
                         name: "Login",
-                        styling: TextStyle(color: Colors.white),
+                        styling: const TextStyle(color: Colors.white),
                       ),
                       const SizedBox(height: 20),
                       const Row(
@@ -213,17 +213,17 @@ class LoginScreenState extends State<LoginScreen> {
     }
 
     var url = "https://xilium.no/wp-json/mobile-apis/login";
-    var login_data = {
+    var loginData = {
       "username": user_name.text,
       "password": password.text,
     };
-    var encode_to_json = json.encode(login_data);
-    var parse_url = Uri.parse(url);
+    var encodeToJson = json.encode(loginData);
+    var parseUrl = Uri.parse(url);
 
     try {
       Response response = await http.post(
-        parse_url,
-        body: encode_to_json,
+        parseUrl,
+        body: encodeToJson,
         headers: {"Content-Type": "application/json"},
       );
 

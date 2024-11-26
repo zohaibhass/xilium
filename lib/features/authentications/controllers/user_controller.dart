@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:xilium/features/authentications/models/signup_model.dart';
+import 'package:xilium/features/authentications/models/user_model.dart';
 
 
-class SignupController {
-  Future<Map<String, dynamic>> registerUser(SignupModel user) async {
+class UserController {
+  Future<Map<String, dynamic>> registerUser(UserModel user) async {
   String url = "https://xilium.no/wp-json/mobile-apis/register";
     final Uri parseUrl = Uri.parse(url);
 

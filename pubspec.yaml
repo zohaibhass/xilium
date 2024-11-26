@@ -29,7 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_svg: ^2.0.7
-  http:
+  http: ^1.2.2
   flutter:
     sdk: flutter
 
@@ -57,14 +57,15 @@ flutter:
   uses-material-design: true
 
   assets:
-   - assets/images/
+    - assets/images/
     - assets/icons/
 
   fonts:
     - family: OpenSans
       fonts:
-        - asset: fonts/OpenSans_Condensed-ExtraBold.ttf
-        - asset: fonts/OpenSans_Condensed-Medium.ttf
+        - asset: assets/fonts/OpenSans_Condensed-Bold.ttf
+        - asset: assets/fonts/OpenSans_SemiCondensed-Bold.ttf
+
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

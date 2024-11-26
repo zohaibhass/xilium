@@ -45,7 +45,7 @@ class _TextFldState extends State<TextFld> {
       },
       obscureText: _obscureText,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 10),
+        contentPadding: const EdgeInsets.symmetric(vertical: 10),
         labelText: widget.lblText ?? "",
         hintText: widget.hintText ?? "",
         hintStyle: const TextStyle(color: Color(0xffDADADA)),
