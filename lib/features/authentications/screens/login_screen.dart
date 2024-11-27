@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
 import 'package:xilium/common/widgets/custom_widgets/heading_text.dart';
 import 'package:xilium/common/widgets/custom_widgets/buttons.dart';
 import 'package:xilium/features/authentications/screens/signup_screen.dart';
-import 'package:xilium/common/widgets/custom_widgets/text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -30,9 +30,17 @@ class LoginScreenState extends State<LoginScreen> {
               Stack(
                 children: [
                   Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        
+                          image: AssetImage(
+                            
+                            "assets/images/blue_container.png",
+                          ),fit: BoxFit.cover
+                          ),
+                    ),
                     width: double.infinity,
                     height: 300,
-                    color: Colors.blue,
                     child: const Padding(
                       padding: EdgeInsets.only(left: 30, top: 50),
                       child: Column(
@@ -42,7 +50,6 @@ class LoginScreenState extends State<LoginScreen> {
                           HeadingText(txt: "Sign in to your"),
                           HeadingText(txt: "Account"),
                           SizedBox(height: 3),
-                          
                         ],
                       ),
                     ),
@@ -87,11 +94,11 @@ class LoginScreenState extends State<LoginScreen> {
                       const Padding(
                         padding: EdgeInsets.only(left: 160),
                         child: InkWell(
-                          child: Text(
-                            "Forget Password?",
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
+                            child: BodyText(
+                          body_text: "Forget Password",
+                          styling: TextStyle(
+                              color: Colors.blue, fontFamily: "OpenSans"),
+                        )),
                       ),
                       const SizedBox(height: 30),
                       LargeButton(
@@ -118,7 +125,13 @@ class LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           SizedBox(width: 15),
-                          Expanded(child: Text("or login with")),
+                          Expanded(
+                              child: BodyText(
+                            body_text: "or login with",
+                            styling: TextStyle(
+                                color: Color(0xff474747),
+                                fontFamily: "OpenSans"),
+                          )),
                           Expanded(
                             child: Divider(
                               color: Color(0xffdadada),
@@ -175,7 +188,12 @@ class LoginScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't Have Account?"),
+                          const BodyText(
+                            body_text: "Don't Have Account ?",
+                            styling: TextStyle(
+                                color: Color(0xff474747),
+                                fontFamily: "OpenSans"),
+                          ),
                           const SizedBox(width: 5),
                           InkWell(
                             onTap: () => Navigator.push(
@@ -183,9 +201,10 @@ class LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                   builder: (context) => const SignupScreen()),
                             ),
-                            child: const Text(
-                              "Register",
-                              style: TextStyle(color: Colors.blue),
+                            child: const BodyText(
+                              body_text: "Register",
+                              styling: TextStyle(
+                                  color: Colors.blue, fontFamily: "OpenSans"),
                             ),
                           ),
                         ],

@@ -66,6 +66,10 @@ flutter:
         - asset: assets/fonts/OpenSans_Condensed-Bold.ttf
         - asset: assets/fonts/OpenSans_SemiCondensed-Bold.ttf
 
+    - family: UberMove
+      fonts:
+        - asset: assets/fonts/UberMove-Bold.ttf
+        - asset: assets/fonts/UberMove-Regular.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

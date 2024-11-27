@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         
         colorScheme:
-            ColorScheme.fromSwatch(backgroundColor: const Color(0xff52bf92)),
+            ColorScheme.fromSwatch(backgroundColor: Colors.blue),
         useMaterial3: true,
       ),
       home: SplashScreen(),

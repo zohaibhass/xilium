@@ -21,16 +21,19 @@ class HeadingText extends StatelessWidget {
 }
 class BodyText extends StatelessWidget {
   final String? body_text;
+
+  final TextStyle? styling;
   const BodyText({
 
     this.body_text,
+    this.styling,
 
 
   });
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Text(body_text ?? " ",style: TextStyle(color: Colors.white,fontFamily: "Opensans",fontSize: 16,fontWeight: FontWeight.normal),);
+    return Text(body_text ?? " ",style: styling ?? TextStyle( color: Colors.white,fontFamily: "Opensans",fontSize: 16,fontWeight: FontWeight.normal),);
   }
   
 }
